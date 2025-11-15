@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Weatherly — Modern Weather App</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="animations.css">
+  <style>
+    /* small extra styles */
+    #themeBody { transition: background 0.8s ease; min-height:100vh; }
+    .glass { backdrop-filter: blur(6px) saturate(120%); background-color: rgba(255,255,255,0.35); }
+    .card-hover:hover { transform: translateY(-6px); box-shadow: 0 10px 25px rgba(0,0,0,0.12); }
+    .suggestion-item:hover { background: rgba(59,130,246,0.06); }
+    .weather-icon { width:64px; height:64px; }
+  </style>
+</head>
+<body id="themeBody" class="bg-gradient-to-br from-sky-200 to-blue-300 flex items-center justify-center p-6">
+  <main class="max-w-4xl w-full">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <!-- Left: Search + Current -->
+      <section class="lg:col-span-1">
+        <div class="glass rounded-2xl p-6 shadow-lg">
+          <h1 class="text-2xl font-bold mb-3">Weatherly</h1>
+          <p class="text-sm text-slate-700 mb-4">Beautiful, animated weather UI. Enter a city or use Current Location.</p>
+
+          <div class="relative mb-3">
+            <input id="cityInput" autocomplete="off" class="w-full p-3 rounded-lg border border-transparent focus:outline-none focus:ring-2 focus:ring-blue-400 transition" placeholder="Search city (e.g., Hyderabad)" />
+            <ul id="suggestions" class="absolute z-40 left-0 right-0 mt-2 bg-white rounded-lg shadow-lg hidden max-h-48 overflow-auto">
+              <!-- suggestions injected -->
+            </ul>
+          </div>
+
+          <div class="flex gap-2 mb-4">
+            <button id="searchBtn" class="flex-1 px-4 py-2 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700 transition">Search</button>
+            <button id="currentBtn" class="px-4 py-2 rounded-lg bg-emerald-500 text-white font-semibold hover:bg-emerald-600 transition">Current</button>
+          </div>
+
+          <div id="errorBox" class="text-red-600 mb-2 min-h-[1.25rem]"></div>
+          <div id="loadingBox" class="text-slate-700 mb-2 min-h-[1.25rem] hidden">Loading…</div>
+
+          <div id="todayWeather" class="mt-4 p-4 rounded-xl bg-white/60 shadow-sm card-hover transition transform">
+            <!-- current weather injected -->
+            <div class="text-slate-600">No city selected</div>
+          </div>
+
+          <div class="mt-4">
+            <h3 class="text-sm font-semibold mb-2">Recent searches</h3>
+            <select id="recentSelect" class="w-full p-2 rounded-lg border bg-white/80"></select>
+          </div>
+        </div>
+      </section>
+
+      <!-- Middle: Forecast -->
+      <section class="lg:col-span-2">
+        <div class="glass rounded-2xl p-6 shadow-lg">
+          <div class="flex items-start justify-between mb-4">
+            <div>
+              <h2 id="cityTitle" class="text-2xl font-bold">—</h2>
+              <p id="descTitle" class="text-sm text-slate-700">Forecast</p>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="text-sm">
+                <span id="tempToday" class="text-xl font-bold">--</span><span id="tempUnit" class="ml-1">°C</span>
+              </div>
+              <button id="toggleBtn" class="px-3 py-1 rounded-md bg-gray-800 text-white text-sm">°C/°F</button>
+            </div>
+          </div>
+
+          <div id="forecast" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            <!-- forecast cards -->
+          </div>
+
+          <div class="mt-6 p-4 rounded-lg bg-white/50">
+            <h3 class="font-semibold mb-2">Details (Selected)</h3>
+            <div id="detailBox" class="grid grid-cols-2 gap-2 text-sm">
+              <div>Humidity: <span id="detailHumidity">--</span></div>
+              <div>Wind: <span id="detailWind">--</span></div>
+              <div>Pressure: <span id="detailPressure">--</span></div>
+              <div>Clouds: <span id="detailClouds">--</span></div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+    </div>
+
+    <footer class="text-center text-xs text-slate-600 mt-6">Replace <code>apiKey</code> in <code>app.js</code> with your OpenWeatherMap key. Run via a local server (python -m http.server 8000).</footer>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
