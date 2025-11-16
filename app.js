@@ -33,24 +33,26 @@ function setLoading(on){
 }
 
 // Recent searches
-function saveRecent(city){
-  try{
-    let list = JSON.parse(localStorage.getItem('recent')) || [];
-    city = city.trim();
-    if(!list.includes(city)){
-      list.unshift(city);
-      if(list.length>6) list = list.slice(0,6);
-      localStorage.setItem('recent', JSON.stringify(list));
-    }
-    renderRecent();
-  }catch(e){}
+function saveRecent(city) {
+  let list = JSON.parse(localStorage.getItem("recent")) || [];
+  city = city.trim();
+
+  if (city && !list.includes(city)) {
+    list.unshift(city);
+    list = list.slice(0, 6); // keep max 6
+    localStorage.setItem("recent", JSON.stringify(list));
+  }
+
+  renderRecent();
 }
-function renderRecent(){
-  const list = JSON.parse(localStorage.getItem('recent')) || [];
-  recentSelect.innerHTML = '';
-  recentSelect.append(new Option('-- pick recent --',''));
-  list.forEach(c=>{
-    recentSelect.append(new Option(c,c));
+
+function renderRecent() {
+  const list = JSON.parse(localStorage.getItem("recent")) || [];
+
+  recentSelect.innerHTML = `<option value="">-- pick recent --</option>`;
+
+  list.forEach(city => {
+    recentSelect.innerHTML += `<option value="${city}">${city}</option>`;
   });
 }
 

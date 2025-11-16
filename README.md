@@ -19,15 +19,6 @@ It uses OpenWeatherMap's 5-day forecast API.
    const apiKey = "YOUR_API_KEY";
    ```
    with your OpenWeatherMap API key (keep the quotes).
-3. Run a local HTTP server (don't open via file://):
-   - Python:
-     ```
-     python -m http.server 8000
-     ```
-     then open http://localhost:8000
-   - Or use VS Code Live Server.
 
-## Notes
-- Autocomplete suggestions are a static list included for demo; to use real autocomplete consider using a geocoding/autocomplete API (e.g., Mapbox, Geoapify, Google Places).
-- API keys may take ~10 minutes after creation to become active.
+
 
