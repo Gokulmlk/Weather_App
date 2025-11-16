@@ -30,9 +30,17 @@ let lastBaseTemp = null;
 
 
 /* Starting suggestion list */
-const cityList = [];
+const cityList = [
+  "Hyderabad",
+  "Mumbai",
+  "Delhi",
+  "Chennai",
+  "Bangalore",
+  "Kolkata",
+  "Pune"
+];
 
-/* CHANGED: Cleaner input listener + validation + suggestions */
+/* Cleaner input listener + validation + suggestions */
 cityInput.addEventListener("input", () => {
   const q = cityInput.value.trim().toLowerCase();
   if (!q) {
@@ -54,7 +62,7 @@ cityInput.addEventListener("input", () => {
   suggestionsEl.classList.remove("hidden");
 });
 
-/* SAME: Click to select suggestion */
+/* Click to select suggestion */
 suggestionsEl.addEventListener("click", (e) => {
   if (e.target.matches("li")) {
     cityInput.value = e.target.textContent;
@@ -62,7 +70,7 @@ suggestionsEl.addEventListener("click", (e) => {
   }
 });
 
-/* SAME: Hide dropdown when clicking outside */
+/* Hide dropdown when clicking outside */
 document.addEventListener("click", (e) => {
   if (!e.target.closest("#cityInput") && !e.target.closest("#suggestions")) {
     suggestionsEl.classList.add("hidden");
@@ -98,7 +106,6 @@ function showAlert(msg) {
 /* RECENT SEARCHES SECTION */
 /* ===================================================== */
 
-/* UPDATED: simplified + cleaned */
 function saveRecent(city) {
   try {
     let list = JSON.parse(localStorage.getItem("recent")) || [];
@@ -114,12 +121,13 @@ function saveRecent(city) {
   } catch (err) {}
 }
 
-/* UPDATED: dropdown hidden until searches exist */
+/* dropdown hidden until searches exist */
 function renderRecent() {
   const list = JSON.parse(localStorage.getItem("recent")) || [];
 
   if (list.length === 0) {
-    recentContainer.classList.add("hidden"); // NEW
+    recentContainer.classList.add("hidden");
+    recentSelect.innerHTML = `<option value="">-- pick recent --</option>`;
     return;
   }
 
@@ -130,6 +138,7 @@ function renderRecent() {
     recentSelect.innerHTML += `<option value="${city}">${city}</option>`;
   });
 }
+
 
 /* ===================================================== */
 /* FETCH SECTION (CITY + GEO) */
