@@ -20,7 +20,28 @@ It uses OpenWeatherMap's 5-day forecast API.
    ```
    with your OpenWeatherMap API key (keep the quotes).
 
-   
+
+### Installation & Setup
+
+Follow these steps to run the project locally:
+
+1. Clone the repository :
+   ```bash
+   git clone https://github.com/Gokulmlk/Weather_App.git
+
+2. cd Weather_App
+3. Replace the API key in `app.js`:
+   ```js
+   const apiKey = "YOUR_API_KEY";
+   ```
+   with your OpenWeatherMap API key (keep the quotes).
+4. Run the index.html
+
+
+
+
+
+
 
 
 
