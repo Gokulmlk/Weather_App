@@ -82,16 +82,16 @@ document.addEventListener("click", (e) => {
 /* ===================================================== */
 
 function setLoading(on) {
-  /* SAME: previously toggled loading message */
+  /* previously toggled loading message */
   loadingBox.classList.toggle("hidden", !on);
 }
 
-/* CHANGED: improved error display */
+/* improved error display */
 function showError(msg) {
   errorBox.textContent = msg || "";
 }
 
-/* NEW: custom alert for extreme heat */
+/* custom alert for extreme heat */
 function showAlert(msg) {
   if (!msg) {
     alertBox.classList.add("hidden");
@@ -210,23 +210,23 @@ function handleData(data) {
     return;
   }
 
-  /* SAME logic: first item = current weather */
+  /* first item = current weather */
   const now = data.list[0];
 
   const name = data.city.name + (data.city.country ? ", " + data.city.country : "");
   const condition = now.weather?.[0]?.main || "Clear";
 
-  /* NEW: update UI header */
+  /* update UI header */
   cityTitle.textContent = name;
   descTitle.textContent = condition;
 
-  /* CHANGED: store Celsius base temp */
+  /* store Celsius base temp */
   lastBaseTemp = Number(now.main.temp);
   currentUnit = "C";
   tempToday.textContent = lastBaseTemp.toFixed(1);
   tempUnit.textContent = "°C";
 
-  /* SAME: fill details */
+  /* fill details */
   detailHumidity.textContent = now.main.humidity + "%";
   detailWind.textContent = now.wind.speed + " m/s";
   detailPressure.textContent = now.main.pressure + " hPa";
@@ -302,7 +302,7 @@ function handleData(data) {
       </div>
     `;
 
-    /* NEW: click card to update details box */
+    /* click card to update details box */
     card.addEventListener("click", () => {
       detailHumidity.textContent = t.main.humidity + "%";
       detailWind.textContent = t.wind.speed + " m/s";
@@ -385,7 +385,7 @@ recentSelect.addEventListener("change", () => {
   }
 });
 
-/* SAME: geolocation */
+/* geolocation */
 currentBtn.addEventListener("click", () => {
   if (!navigator.geolocation) {
     showError("Geolocation not supported");
